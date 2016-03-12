@@ -9,7 +9,6 @@
  *********************************************************)
 
 type note = int
-type t
 	   
 exception Non_valid_file		
 

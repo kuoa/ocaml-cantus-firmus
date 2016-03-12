@@ -11,7 +11,6 @@
 exception Non_valid_file
 
 type note = int
-type t
 	      	    
 let read_csv file =
   let comma_regex = Str.regexp "," in

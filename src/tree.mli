@@ -10,12 +10,11 @@
  * https://github.com/kuoa/ocaml-cantus-firmus           *
  *********************************************************)
 
-type note = int
-type node = Node of note * note * tree
- and tree = node list
-
+type note = Input.note
+type tree
 type t
 
-val new_tree : tree
+(* val new_tree : tree		 *)
 val build_tree : note list -> tree
-val traverse_tree : tree -> note list       
+				(* val traverse_tree : tree -> note list       *)
+
