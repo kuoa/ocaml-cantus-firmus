@@ -1,5 +1,5 @@
 (*********************************************************
- * OCaml tralala project description                     *
+ * ocaml-cantus-firmus project description               *
  *********************************************************
  * Module: Tree                                          *
  * -------                                               *

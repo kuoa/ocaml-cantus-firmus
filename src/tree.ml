@@ -1,5 +1,5 @@
 (*********************************************************
- * OCaml tralala project description                     *
+ * ocaml-cantus-firmus project description               *
  *********************************************************
  * Module: Tree                                          *
  * -------                                               *
@@ -10,7 +10,7 @@
  * https://github.com/kuoa/ocaml-cantus-firmus           *
  *********************************************************)
 
-type note = int
+type note = int  (* Change to Input.note *)
 type node = |Node of note * note * tree
  and tree = node list
 type t = { mutable cantus : note list;
@@ -51,12 +51,12 @@ let new_tree = [Node (0, 0, [])]
 (** Eliminates all the paths from `tree` of size inferior to `depth`. *)
 let rec clean_tree tree depth =
   match tree with
+  | [] -> []  
   | Node (c, n, []) :: rest ->
-     if depth > 1 then (clean_tree rest depth)
+     if depth > 0 then (clean_tree rest depth)
      else Node(c, n, []) :: (clean_tree rest depth)
   | Node (c, n, sons) :: rest ->
      Node (c, n, (clean_tree sons (depth - 1))) :: (clean_tree rest depth)
-  | [] -> []  
 
 (** Builds a `note tree` from a `note_list`. *)
 let build_tree note_list =
@@ -68,15 +68,25 @@ let build_tree note_list =
        let counter_nodes =
 	 List.fold_left
 	   (fun rez c ->
-	    let nodes = loop c note rest in
-	    cons_hd nodes rez) [] counter_notes in
+	    let nodes = loop c note rest in cons_hd nodes rez)
+	   [] counter_notes in
        [Node (c_note, prev_note, List.rev counter_nodes)] in (* List.rev optional *)
-  loop 0 0 (note_list @ [0]) (* hack *)
+  let tree = loop 0 0 (note_list @ [0]) (* hack *) in
+  clean_tree tree (List.length note_list)
 
-(** To do *)
-let traverse_tree tree = []
-			   
-
+(** Builds a random list of counter notes from `tree`. *)
+let traverse_tree tree =
+  let _ = Random.self_init () in
+  let rec loop tree rez =
+    match tree with
+    | Node (c, _, []) :: _ -> c::rez
+    | Node (c, _, sons) :: _ ->
+       let i = Random.int (List.length sons) in
+       let next_node = [List.nth sons i] in
+       loop next_node (c :: rez)
+    | [] -> []
+  in List.rev (loop tree []) (* List.rev optional *)
+               
 (** Prints the `tree`, a path on each line. *)
 let print_tree tree =
   let rec loop_print tree word = 
