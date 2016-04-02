@@ -9,7 +9,7 @@ let time f x =
 let test () =
 
   printf ("\nInput module test functions\n");
-  let notes = Input.read_csv "notes.csv" in
+  let notes = Read_csv.read_partition "notes.csv" in
   List.iter (printf "%d ") notes;
 
   printf ("\n\nTree module test functions\n");
@@ -26,20 +26,6 @@ let test () =
   printf "\nA random counter list for the tree [0; 3; 5]\n";
   List.iter print_int (Tree.traverse_tree tree);
   print_newline();
-
-
-  printf ("\nFunctor test functions\n");
-  printf ("\nRead partition\n");
-  let partition = Cantus.Firmus.read_partition "notes.csv" in
-  List.iter (Printf.printf "%d ") partition;
-  printf ("\n\nBuild tree\n");
-  let tree = Cantus.Firmus.build_tree partition in
-  Tree.print_tree tree;
-  printf ("\nBuild counter-tree\n");
-  let c_tree = Cantus.Firmus.traverse_tree tree in
-  List.iter (Printf.printf "%d ") c_tree;
-  print_newline()
-  
   
 	  
 	   

@@ -10,11 +10,10 @@
  * https://github.com/kuoa/ocaml-cantus-firmus           *
  *********************************************************)
 
-type note = Input.note
+type note = Read_csv.note
 type node = |Node of note * note * tree
  and tree = node list
-type t = { mutable cantus : note list;
-	   mutable contrapunctus : tree }
+
 
 (** Checks if the note obeys the hormonical rule. *)
 let is_harmonique = function
@@ -85,7 +84,7 @@ let traverse_tree tree =
        let next_node = [List.nth sons i] in
        loop next_node (c :: rez)
     | [] -> []
-  in List.rev (loop tree []) (* List.rev optional *)
+  in (List.tl (List.rev (loop tree []))) (* List.rev optional *)
                
 (** Prints the `tree`, a path on each line. *)
 let print_tree tree =

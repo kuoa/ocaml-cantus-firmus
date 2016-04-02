@@ -10,9 +10,8 @@
  * https://github.com/kuoa/ocaml-cantus-firmus           *
  *********************************************************)
 
-type note = Input.note
+type note = Read_csv.note
 type tree
-type t
 
 val new_tree : tree		
 val build_tree : note list -> tree
