@@ -10,7 +10,7 @@
  * https://github.com/kuoa/ocaml-cantus-firmus           *
  *********************************************************)
 
-type note = int  (* Change to Input.note *)
+type note = Input.note
 type node = |Node of note * note * tree
  and tree = node list
 type t = { mutable cantus : note list;

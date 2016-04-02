@@ -8,10 +8,10 @@
  * https://github.com/kuoa/ocaml-cantus-firmus           *
  *********************************************************)
 
-exception Non_valid_file
-
 type note = int
-	      	    
+	      
+exception Non_valid_file
+	    
 let read_csv file =
   let comma_regex = Str.regexp "," in
   let note_list = ref [] in
