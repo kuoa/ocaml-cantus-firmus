@@ -3,7 +3,7 @@ PROGRAM = main.native
 
 all:
 	ocamlbuild -libs $(LIBS) $(PROGRAM);
-	@mv main.native main
+	@mv main.native cantus_firmus
 
 clean:
 	ocamlbuild -clean

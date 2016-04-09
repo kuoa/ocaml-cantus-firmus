@@ -12,7 +12,6 @@
 open MIDI.MIDI
 
 exception Ambitous_wrong of int
-exception Incorect_list
 
 type note = Tree.note
 

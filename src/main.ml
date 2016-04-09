@@ -1,14 +1,12 @@
 open Cantus.Firmus
 open Printf
-
-
-let track_original = "track-1.mid"                (* original track name *)
-let track_output = "output.midi"                  (* my-original track name *)
-let track_cantus_output = "cantus-output.midi"    (* my-original-output name *)
-    
     
 let () =
 
+  let track_original = Sys.argv.(1)  in                           (* original track name *)
+  let track_output = "input_" ^ track_original in                 (* my-original track name *)
+  let track_cantus_output = "output_" ^ track_original in         (* my-original-output name *)
+  
   let note_list = read_partition track_original in
   let counter_note_tree = build_tree note_list in  
   let counter_note_list = traverse_tree counter_note_tree in
@@ -25,5 +23,5 @@ let () =
   write_partition note_list counter_note_list track_cantus_output;
   printf "...Done\n";
 
-  printf ("\nYou may now liste to [%s] and then compare with [%s]\n") track_output track_cantus_output
+  printf ("\nYou may now listen to [%s] and then compare with [%s]\n\n") track_output track_cantus_output
   
